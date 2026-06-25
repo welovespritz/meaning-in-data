@@ -375,10 +375,15 @@ function goStep(idx, silent) {
 
 /* ───────────── gates ───────────── */
 const GATE_WORDS = { 2: "DATA", 3: "MEANING" };
+function coachHTML(s) {
+  return `<div class="callout" style="border-left-color:${STEPS[s].color}">
+    <h3>Coaching questions: ${STEPS[s].name.toLowerCase()}</h3>
+    <ul>${COACH[s].map(c => `<li>${c}</li>`).join("")}</ul></div>`;
+}
 function showGate(n, silent) {     // n = 2 or 3 (the stage about to be unlocked)
   const upto = n - 2;              // gate2 → show step 0; gate3 → show steps 0..1
   let h = "";
-  for (let s = 0; s <= upto; s++) h += dimRowHTML(s);
+  for (let s = 0; s <= upto; s++) h += dimRowHTML(s) + coachHTML(s);
   document.getElementById("gate" + n + "dims").innerHTML = h;
   currentStage = "gate" + n;
   show("st-gate" + n);
