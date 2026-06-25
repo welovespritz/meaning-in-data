@@ -89,7 +89,8 @@ input[type=text]:focus, textarea:focus { border-color: var(--gold); }
 .choice:hover { border-color: var(--gold); transform: translateY(-1px); }
 .choice.sel { border-color: var(--champ); background: var(--navy3); }
 .choice.sel::before { content: "✓  "; color: var(--champ); font-weight: 700; }
-.steprow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; }
+.steprow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 6px; margin-bottom: 28px; }
+.ctaHead { color: var(--champ); font-size: 19px; font-weight: 700; margin-top: 6px; margin-bottom: 4px; }
 .steppick { font-family: "Campari", Georgia, serif; font-size: 13.5px; padding: 9px 14px; background: var(--navy3); color: var(--ice);
   border: 1px solid transparent; border-radius: 7px; cursor: pointer; transition: border-color .15s, transform .1s; }
 .steppick:hover { border-color: var(--gold); transform: translateY(-1px); }
@@ -203,6 +204,7 @@ a.reset { color: var(--grey); text-decoration: underline; cursor: pointer; }
   <h1>One commitment.</h1>
   <div id="commitDims"></div>
   <div class="steprow" id="stepPicker"></div>
+  <h2 class="ctaHead">Pick your move</h2>
   <p class="sub" id="commitLead"></p>
   <div id="choiceHost"></div>
   <textarea id="freeText" placeholder="…or write your own, or add detail to the one you picked (who, when, which dataset)."></textarea>
@@ -471,22 +473,22 @@ function pickStep(i) {
 }
 function renderCommitStage() {
   const step = effectiveStep();
-  let dh = "";
-  for (let s = 0; s < 3; s++) dh += dimRowHTML(s);
-  document.getElementById("commitDims").innerHTML = dh;
   renderStepPicker();
   document.getElementById("commitLead").innerHTML =
     `One commitment to raise your confidence a notch at <b>${STEPS[step].name.toLowerCase()}</b>. Small and concrete beats ambitious. Pick one, or write your own below.`;
   const host = document.getElementById("choiceHost");
   host.innerHTML = COMMITS[step].map((c, i) =>
     `<div class="choice${chosenCommit === i ? " sel" : ""}" data-i="${i}" onclick="pickCommit(${i})">${c}</div>`).join("");
-  animateBars();
 }
 function openCommit(silent) {
   currentStage = "commit";
   profile = profile || computeProfile(answers);
+  let dh = "";
+  for (let s = 0; s < 3; s++) dh += dimRowHTML(s);
+  document.getElementById("commitDims").innerHTML = dh;
   renderCommitStage();
   show("st-commit");
+  animateBars();
   if (!silent) save();
 }
 function pickCommit(i) {
