@@ -435,7 +435,7 @@ function showProfile(silent) {
   const fb = document.getElementById("focusBox");
   fb.style.borderLeftColor = STEPS[focus].color;
   fb.innerHTML = `<h3>Your focus step: ${STEPS[focus].name.toLowerCase()}</h3>
-    <p>The step where one new habit buys you the most. Three questions to sit with during the session:</p>
+    <p>The step where one new habit buys you the most. Three questions to sit with after the session:</p>
     <ul>${COACH[focus].map(c => `<li>${c}</li>`).join("")}</ul>`;
 
   show("st-profile");
