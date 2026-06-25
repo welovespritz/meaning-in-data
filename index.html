@@ -377,7 +377,7 @@ function goStep(idx, silent) {
 const GATE_WORDS = { 2: "DATA", 3: "MEANING" };
 function coachHTML(s) {
   return `<div class="callout" style="border-left-color:${STEPS[s].color}">
-    <h3>Coaching questions</h3>
+    <h3>Coach yourself</h3>
     <ul>${COACH[s].map(c => `<li>${c}</li>`).join("")}</ul></div>`;
 }
 function showGate(n, silent) {     // n = 2 or 3 (the stage about to be unlocked)
